@@ -14,3 +14,19 @@ c:\users\extsistmovilidad31\documents\visual studio 2013\Projects\PushNotificati
 c:\users\extsistmovilidad31\documents\visual studio 2013\Projects\PushNotificationsDemo\PushNotificationsDemo\obj\Debug\PushNotificationsDemo.dll
 c:\users\extsistmovilidad31\documents\visual studio 2013\Projects\PushNotificationsDemo\PushNotificationsDemo\obj\Debug\PushNotificationsDemo.pdb
 C:\Users\extsistmovilidad31\documents\visual studio 2013\Projects\PushNotificationsDemo\PushNotificationsDemo\obj\Debug\PushNotificationsDemo.csprojResolveAssemblyReference.cache
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\bin\PushNotificationsDemo.dll.config
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\bin\PushNotificationsDemo.dll
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\bin\PushNotificationsDemo.pdb
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\bin\Newtonsoft.Json.dll
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\bin\RestSharp.dll
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\bin\System.Net.Http.Formatting.dll
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\bin\System.Web.Http.dll
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\bin\System.Web.Http.WebHost.dll
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\bin\RestSharp.xml
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\bin\Newtonsoft.Json.xml
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\bin\System.Net.Http.Formatting.xml
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\bin\System.Web.Http.xml
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\bin\System.Web.Http.WebHost.xml
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\obj\Debug\PushNotificationsDemo.csprojResolveAssemblyReference.cache
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\obj\Debug\PushNotificationsDemo.dll
+C:\sinner_universe\AppceleratorPushNotificationsDemo\PushNotificationsDemo\obj\Debug\PushNotificationsDemo.pdb
