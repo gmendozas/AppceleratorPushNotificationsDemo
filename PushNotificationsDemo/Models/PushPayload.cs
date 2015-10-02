@@ -22,5 +22,12 @@ namespace PushNotificationsDemo.Models
 
         public bool vibrate { get; set; }
         #endregion
+
+        #region Métodos
+        public bool isNotValidInstance()
+        {
+            return string.IsNullOrEmpty(alert) && string.IsNullOrEmpty(title);
+        }
+        #endregion
     }   
 }
