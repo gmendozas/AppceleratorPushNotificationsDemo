@@ -20,18 +20,11 @@ namespace PushNotificationsDemo.Controllers
         private NotificationStatus status;
 
         [Route("api/AppceleratorApiRest/{channel}")]
-        public NotificationStatus Post(string channel, PushPayload payload)
+        public NotificationStatus Post(string channel, PushNotification notification)
         {
-            if (Object.Equals(null, payload))
+            if (Object.Equals(null, notification.Payload))
                 return new NotificationStatus { StatusCode = "0", StatusDescription = "Los parámetros son incorrectos" };
-            else if(payload.isNotValidInstance())
-            {
-                payload.alert = "Alerta desde el servicio";
-                payload.badge = "1";
-                payload.icon = "appicon";
-                payload.vibrate = true;
-                //return new NotificationStatus { StatusCode = "0", StatusDescription = "Los parámetros del mensaje son incorrectos, 'alert' y 'title' son campos obligatorios" };
-            }
+            
             try
             {
                 client = new RestClient("https://api.cloud.appcelerator.com");
@@ -52,9 +45,12 @@ namespace PushNotificationsDemo.Controllers
                     dynamic loginResponse = JsonConvert.DeserializeObject(response.Content);
                     if (loginResponse.response.users.Count > 0)
                     {
-                        subscriptions = new List<Subscription>();
-                        GetSubscriptions(loginResponse.response.users[0].id.ToString());
-                        SendPush(payload, channel);
+                        if (notification.Devices.Count == 0)
+                        {
+                            subscriptions = new List<Subscription>();
+                            GetSubscriptions(loginResponse.response.users[0].id.ToString());
+                        }                        
+                        SendPush(notification, channel);
                     }
                 }
                 else
@@ -79,7 +75,7 @@ namespace PushNotificationsDemo.Controllers
                 request.AddUrlSegment("appkey", APP_KEY);
 
                 request.AddParameter("pretty_json", "true");
-                request.AddParameter("user_id", idUsuario);
+                request.AddParameter("type", "android");
                 var response = client.Execute(request);
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
@@ -96,18 +92,27 @@ namespace PushNotificationsDemo.Controllers
             }
         }
 
-        private void SendPush(PushPayload payload, string channel)
+        private void SendPush(PushNotification notification, string channel)
         {
-            if (subscriptions.Count > 0)
+            if (notification.Devices.Count > 0 || IsSubscriptionsValid())
             {
                 try
                 {
-                    string payloadStr = JsonConvert.SerializeObject(payload);
+                    if (string.IsNullOrEmpty(notification.Payload.sound))
+                        notification.Payload.sound = "default";
+                    string payloadStr = JsonConvert.SerializeObject(notification.Payload);
                     string delimiter = ",";
-                    var validSubscriptions = from s in subscriptions
-                                             where s.channel.Contains(channel)
-                                             select s.device_token;
-                    string tokens = String.Join(delimiter, validSubscriptions);
+                    string tokens = string.Empty;
+                    if(notification.Devices.Count > 0)
+                    {
+                        tokens = String.Join(delimiter, notification.Devices);
+                    } else {
+                        var validSubscriptions = from s in subscriptions
+                                                 where s.channel.Contains(channel)
+                                                 select s.device_token;
+                        tokens = String.Join(delimiter, validSubscriptions);
+                    }
+                    
 
                     client.BaseUrl = new Uri("https://api.cloud.appcelerator.com");
                     request.Resource = "/v1/push_notification/notify_tokens.json?key={appkey}";
@@ -151,6 +156,15 @@ namespace PushNotificationsDemo.Controllers
                 string errorMessage = "Message " + ex.Message + " \n Inner Exception " + ex.InnerException + " \n Stack Trace" + ex.StackTrace;
                 status = new NotificationStatus { StatusCode = "-1", StatusDescription = errorMessage };
             }
+        }
+
+        private bool IsSubscriptionsValid()
+        {
+            if (Object.Equals(null, subscriptions))
+                return false;
+            else if (subscriptions.Count == 0)
+                return false;
+            return true;
         }
     }
 }

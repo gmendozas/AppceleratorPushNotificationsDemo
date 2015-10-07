@@ -7,7 +7,8 @@ namespace PushNotificationsDemo.Models
 {
     public class PushNotification
     {
-        public PushPayload payload { get; set; }
-        public Location location { get; set; }
+        public PushPayload Payload { get; set; }
+        public Location Location { get; set; }
+        public List<string> Devices { get; set; }
     }
 }
